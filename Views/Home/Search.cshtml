@@ -1,0 +1,30 @@
+@model IEnumerable<rezerviraj.si.Models.Restavracija>
+
+<div class="container py-5">
+    <h1 class="mb-5">Najdene restavracije na lokaciji @ViewData["Kraj"], @ViewData["Drzava"]</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (Restavracija restavracija in Model)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://cdn.cnn.com/cnnnext/dam/assets/170623125207-ana-ros-restaurants-ljubljana-strelec-terrace-full-169.jpg"
+                    class="card-img-top" alt="img">
+                    <div class="card-body">
+                        <h5 class="card-title">@restavracija.Naziv</h5>
+                        <p class="card-text text-secondary">
+                            @restavracija.Lokacija.ToString() <br>
+                            @restavracija.TelefonskaSt, @restavracija.Email
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-link ps-0" asp-controller="Restaurant" asp-action="Details"
+                            asp-route-id="@restavracija.Id">
+                            Pokaži več
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

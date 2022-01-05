@@ -1,0 +1,33 @@
+@using Microsoft.AspNetCore.Identity
+@using rezerviraj.si.Models
+
+@inject SignInManager<Restavracija> SignInManager
+@inject UserManager<Restavracija> UserManager
+
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item me-3">
+            <a class="nav-link text-dark" asp-action="Details" asp-controller="Restaurant"
+                asp-route-id="@UserManager.GetUserId(User)">
+                <i class="fas fa-user-circle fa-lg"></i> @UserManager.GetUserName(User)
+            </a>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl='@Url.Action("Index", "Home", new { area = "" })'>
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">
+                    <i class="fas fa-sign-out-alt fa-lg"></i> Odjava
+                </button>
+            </form>
+        </li>
+    } else {
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+            <i class="fas fa-sign-in-alt"></i> Prijava
+        </a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">
+            <i class="fas fa-user-plus"></i> Registracija
+        </a>
+    }
+</ul>

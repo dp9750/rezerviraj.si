@@ -1,0 +1,144 @@
+@model rezerviraj.si.Models.Restavracija
+
+@using Microsoft.AspNetCore.Identity
+@using rezerviraj.si.Models
+
+@inject SignInManager<Restavracija> SignInManager
+@inject UserManager<Restavracija> UserManager
+
+@{
+    ViewData["Title"] = @Model.Naziv;
+}
+
+<div class="container pt-5">
+    @if (SignInManager.IsSignedIn(User) && UserManager.GetUserId(User) == Model.Id) {
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <section>
+                        <h4>Akcije</h4>
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item ps-0 border-0">
+                                        <a class="btn btn-outline-primary btn-block text-start"
+                                            asp-action="Edit" asp-route-id="@Model.Id">
+                                            <i class="fas fa-edit"></i>
+                                            Uredi
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item ps-0 border-0">
+                                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                                            asp-route-returnUrl='@Url.Action("Index", "Home", new { area = "" })'>
+                                            <button id="logout" type="submit" class="btn btn-outline-secondary btn-block text-start">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                                Odjava
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li class="list-group-item ps-0 border-0">
+                                        <a class="btn btn-outline-danger btn-block text-start"
+                                            asp-action="Delete" asp-route-id="@Model.Id">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Izbriši restavracijo
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-6 offset-md-2">
+                    <section>
+                        <h4 class="text-center">Restavracija @Model.Naziv</h4>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center">
+                                <img src="https://cdn.cnn.com/cnnnext/dam/assets/170623125207-ana-ros-restaurants-ljubljana-strelec-terrace-full-169.jpg" 
+                                    alt="img" class="img circle">
+                            </div>
+                        </div>
+
+                        <table class="table mt-4">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th scope="col" colspan="2" class="text-center">Podrobnosti</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.Naziv)</th>
+                                    <td>@Html.DisplayFor(model => model.Naziv)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.Email)</th>
+                                    <td>@Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.DatumRegistracije)</th>
+                                    <td>@Html.DisplayFor(model => model.DatumRegistracije)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.TelefonskaSt)</th>
+                                    <td>@Html.DisplayFor(model => model.TelefonskaSt)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.Lokacija)</th>
+                                    <td>@Model.Lokacija.ToString()</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </section>
+                </div>
+            </div>
+        } else {
+            <div class="row justify-content-center">
+                <div class="mb-4 col-md-6">
+                    <section>
+                        <h4 class="text-center">Restavracija @Model.Naziv</h4>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center">
+                                <img src="https://cdn.cnn.com/cnnnext/dam/assets/170623125207-ana-ros-restaurants-ljubljana-strelec-terrace-full-169.jpg" 
+                                    alt="img" class="img circle">
+                            </div>
+                        </div>
+
+                        <table class="table mt-4">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th scope="col" colspan="2" class="text-center">Podrobnosti</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.Naziv)</th>
+                                    <td>@Html.DisplayFor(model => model.Naziv)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.Email)</th>
+                                    <td>@Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.DatumRegistracije)</th>
+                                    <td>@Html.DisplayFor(model => model.DatumRegistracije)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.TelefonskaSt)</th>
+                                    <td>@Html.DisplayFor(model => model.TelefonskaSt)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">@Html.DisplayNameFor(model => model.Lokacija)</th>
+                                    <td>@Model.Lokacija.ToString()</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </section>
+                </div>
+            </div>
+        }
+</div>
+

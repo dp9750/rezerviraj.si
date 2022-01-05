@@ -1,0 +1,102 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container pt-5">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="row">
+            <div class="col-md-4">
+
+                <h4>Registracija restavracije</h4>
+                <hr />
+                <div class="form-group">
+                    <label asp-for="Input.Naziv"></label>
+                    <input asp-for="Input.Naziv" class="form-control mb-2" />
+                    <span asp-validation-for="Input.Naziv" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control mb-2" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control mb-2" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control mb-2" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.TelefonskaSt"></label>
+                    <input asp-for="Input.TelefonskaSt" class="form-control mb-2" />
+                    <span asp-validation-for="Input.TelefonskaSt" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg mt-4">Registracija</button>
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+            </div>
+
+            <div class="col-md-5 offset-md-3">
+                <section>
+                    <h4>Dodatne informacije</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Input.Lokacija.Ulica"></label>
+                                <input asp-for="Input.Lokacija.Ulica" class="form-control mb-2" />
+                                <span asp-validation-for="Input.Lokacija.Ulica" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Input.Lokacija.HisnaSt"></label>
+                                <input asp-for="Input.Lokacija.HisnaSt" class="form-control mb-2" />
+                                <span asp-validation-for="Input.Lokacija.HisnaSt" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Input.Lokacija.PostnaSt"></label>
+                                <input asp-for="Input.Lokacija.PostnaSt" class="form-control mb-2" />
+                                <span asp-validation-for="Input.Lokacija.PostnaSt" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label asp-for="Input.Lokacija.Kraj"></label>
+                                <input asp-for="Input.Lokacija.Kraj" class="form-control mb-2" />
+                                <span asp-validation-for="Input.Lokacija.Kraj" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Input.Lokacija.Drzava"></label>
+                                <input asp-for="Input.Lokacija.Drzava" class="form-control mb-2" />
+                                <span asp-validation-for="Input.Lokacija.Drzava" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
