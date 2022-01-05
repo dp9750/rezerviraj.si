@@ -35,8 +35,10 @@ namespace rezerviraj.si.Controllers
             return View(context);
         }
 
-        // GET: Table/Create
-        public IActionResult Create() {
+        // GET: Table/Create/RestavracijaID
+        public IActionResult Create(string id) {
+            ViewData["RestavracijaID"] = id;
+
             return View();
         }
 
