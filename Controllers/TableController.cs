@@ -26,16 +26,21 @@ namespace rezerviraj.si.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        // GET: Table/RestaurantID
+        public async Task<IActionResult> Index(string id)
         {
-            var context = await _restaurantContext.Mize.ToListAsync();
+            var context = await _restaurantContext.Mize
+                .Where(m => m.RestavracijaID == id)
+                .ToListAsync();
             return View(context);
         }
 
+        // GET: Table/Create
         public IActionResult Create() {
             return View();
         }
 
+        // POST: Table/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RestavracijaID,MizaID,StMize,StOseb")] Miza miza)
