@@ -1,0 +1,43 @@
+@model rezerviraj.si.Models.Rezervacija
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container pt-5">
+
+    <h1>Temp dodaj rezervacijo</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            <!-- 
+        public Restavracija Restavracija { get; set; }
+        public Gost Gost { get; set; }
+        public DateTime RezerviranoZa { get; set; }
+        public DateTime DatumRezervacije { get; set; }
+        public ICollection<Miza>? Mize { get; set; }
+        public int StOseb { get; set; }
+            -->
+
+            <!-- Datum registracije skini iz restavracije -->
+
+            <select class="form-select" asp-for="Restavracija"
+                required asp-items="ViewBag.Restavracije"></select>
+
+
+            <div class="form-group">
+                <label asp-for="RezerviranoZa" class="control-label"></label>
+                <input asp-for="RezerviranoZa" class="form-control mb-2" />
+                <span asp-validation-for="RezerviranoZa" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Pregled vseh restavracij</a>
+    </div>
+
+</div>

@@ -16,7 +16,7 @@ namespace rezerviraj.si.Data
         public DbSet<Restavracija> Restavracije { get; set; }
         public DbSet<Gost> Gostje { get; set; }
         public DbSet<Lokacija> Lokacija { get; set; }
-        public DbSet<Miza> Miza { get; set; }
+        public DbSet<Miza> Mize { get; set; }
         public DbSet<Rezervacija> Rezervacija { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

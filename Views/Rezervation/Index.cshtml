@@ -6,6 +6,11 @@
 
 <div class="container pt-5">
 
-    <h1>Nisi se nic naredo :)</h1>
+    <h1>Vse rezervacije</h1>
+
+    @foreach (var rezervacija in Model)
+    {
+        @Html.Raw(rezervacija);
+    }
     
 </div>

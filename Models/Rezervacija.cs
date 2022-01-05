@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace rezerviraj.si.Models
 {
@@ -10,8 +9,6 @@ namespace rezerviraj.si.Models
         public Gost Gost { get; set; }
         public DateTime RezerviranoZa { get; set; }
         public DateTime DatumRezervacije { get; set; }
-        #nullable enable
-        public ICollection<Miza>? Mize { get; set; }
         public int StOseb { get; set; }
     }
 }

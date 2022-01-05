@@ -7,7 +7,6 @@ namespace rezerviraj.si.Models
 {
     public class Restavracija : IdentityUser
     {
-        public int RestavracijaID { get; set; }
         [Display(Name = "Elektronski naslov")]
         public override string Email { get; set; }
         public string Geslo { get; set; }

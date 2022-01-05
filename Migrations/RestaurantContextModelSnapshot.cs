@@ -189,18 +189,21 @@ namespace rezerviraj.si.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Drzava")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HisnaSt")
                         .HasColumnType("int");
 
                     b.Property<string>("Kraj")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PostnaSt")
                         .HasColumnType("int");
 
                     b.Property<string>("Ulica")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LokacijaID");
@@ -215,11 +218,8 @@ namespace rezerviraj.si.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("RestavracijaId")
+                    b.Property<string>("RestavracijaID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("RezervacijaID")
-                        .HasColumnType("int");
 
                     b.Property<int>("StMize")
                         .HasColumnType("int");
@@ -229,9 +229,7 @@ namespace rezerviraj.si.Migrations
 
                     b.HasKey("MizaID");
 
-                    b.HasIndex("RestavracijaId");
-
-                    b.HasIndex("RezervacijaID");
+                    b.HasIndex("RestavracijaID");
 
                     b.ToTable("Miza");
                 });
@@ -289,9 +287,6 @@ namespace rezerviraj.si.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<int>("RestavracijaID")
-                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -407,11 +402,7 @@ namespace rezerviraj.si.Migrations
                 {
                     b.HasOne("rezerviraj.si.Models.Restavracija", null)
                         .WithMany("Mize")
-                        .HasForeignKey("RestavracijaId");
-
-                    b.HasOne("rezerviraj.si.Models.Rezervacija", null)
-                        .WithMany("Mize")
-                        .HasForeignKey("RezervacijaID");
+                        .HasForeignKey("RestavracijaID");
                 });
 
             modelBuilder.Entity("rezerviraj.si.Models.Restavracija", b =>

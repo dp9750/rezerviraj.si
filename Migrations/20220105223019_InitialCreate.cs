@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace rezerviraj.si.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,11 +44,11 @@ namespace rezerviraj.si.Migrations
                 {
                     LokacijaID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ulica = table.Column<string>(nullable: true),
+                    Ulica = table.Column<string>(nullable: false),
                     HisnaSt = table.Column<int>(nullable: false),
-                    Kraj = table.Column<string>(nullable: true),
+                    Kraj = table.Column<string>(nullable: false),
                     PostnaSt = table.Column<int>(nullable: false),
-                    Drzava = table.Column<string>(nullable: true)
+                    Drzava = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +94,6 @@ namespace rezerviraj.si.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    RestavracijaID = table.Column<int>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     Geslo = table.Column<string>(nullable: true),
                     Naziv = table.Column<string>(nullable: true),
@@ -199,6 +198,27 @@ namespace rezerviraj.si.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Miza",
+                columns: table => new
+                {
+                    MizaID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RestavracijaID = table.Column<string>(nullable: true),
+                    StMize = table.Column<int>(nullable: false),
+                    StOseb = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Miza", x => x.MizaID);
+                    table.ForeignKey(
+                        name: "FK_Miza_Restavracija_RestavracijaID",
+                        column: x => x.RestavracijaID,
+                        principalTable: "Restavracija",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rezervacija",
                 columns: table => new
                 {
@@ -224,34 +244,6 @@ namespace rezerviraj.si.Migrations
                         column: x => x.RestavracijaId,
                         principalTable: "Restavracija",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Miza",
-                columns: table => new
-                {
-                    MizaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StMize = table.Column<int>(nullable: false),
-                    StOseb = table.Column<int>(nullable: false),
-                    RestavracijaId = table.Column<string>(nullable: true),
-                    RezervacijaID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Miza", x => x.MizaID);
-                    table.ForeignKey(
-                        name: "FK_Miza_Restavracija_RestavracijaId",
-                        column: x => x.RestavracijaId,
-                        principalTable: "Restavracija",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Miza_Rezervacija_RezervacijaID",
-                        column: x => x.RezervacijaID,
-                        principalTable: "Rezervacija",
-                        principalColumn: "RezervacijaID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -283,14 +275,9 @@ namespace rezerviraj.si.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Miza_RestavracijaId",
+                name: "IX_Miza_RestavracijaID",
                 table: "Miza",
-                column: "RestavracijaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Miza_RezervacijaID",
-                table: "Miza",
-                column: "RezervacijaID");
+                column: "RestavracijaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Restavracija_LokacijaID",
@@ -341,10 +328,10 @@ namespace rezerviraj.si.Migrations
                 name: "Miza");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Rezervacija");
 
             migrationBuilder.DropTable(
-                name: "Rezervacija");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Gost");

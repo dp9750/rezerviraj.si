@@ -30,7 +30,10 @@ namespace rezerviraj.si.Controllers
             ViewData["Drzave"] = new SelectList(await _restaurantContext.GetDistinctCountires());
             ViewData["Kraji"] = new SelectList(await _restaurantContext.GetDistinctCities());
 
-            return View(context[0]);
+            if (context.Count > 0)
+                return View(context[0]);
+            else 
+                return View();
         }
 
         public IActionResult Privacy()

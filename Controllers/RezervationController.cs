@@ -23,7 +23,7 @@ namespace rezerviraj.si.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             //var context = await _restaurantContext.Restavracije.Include(l => l.Lokacija).ToListAsync();
 
@@ -33,6 +33,15 @@ namespace rezerviraj.si.Controllers
             return View(null);
 
             //return View(context[0]);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var restavracije = await _restaurantContext.Restavracije.ToListAsync();
+
+            ViewData["Restavracije"] = new SelectList(restavracije);
+
+            return View();
         }
     }
 }
