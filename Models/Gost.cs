@@ -1,6 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System;
-using System.Text.Json;
 
 namespace rezerviraj.si.Models
 {
@@ -15,9 +13,5 @@ namespace rezerviraj.si.Models
         public string Geslo { get; set; }
         [Display(Name = "Telefonska številka")]
         public string TelefonskaSt { get; set; }
-
-        public string Json() {
-            return JsonSerializer.Serialize(this);
-        }
     }
 }

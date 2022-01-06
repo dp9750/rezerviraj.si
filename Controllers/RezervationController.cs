@@ -14,34 +14,91 @@ namespace rezerviraj.si.Controllers
 {
     public class RezervationController : Controller
     {
-        private readonly RestaurantContext _restaurantContext;
+        private readonly RestaurantContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public RezervationController(ILogger<HomeController> logger, RestaurantContext restaurantContext)
+        public RezervationController(ILogger<HomeController> logger, RestaurantContext context)
         {
-            _restaurantContext = restaurantContext;
+            _context = context;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        // GET: Rezervation
+        public async Task<IActionResult> Index()
         {
-            //var context = await _restaurantContext.Restavracije.Include(l => l.Lokacija).ToListAsync();
-
-            //ViewData["Drzave"] = new SelectList(await _restaurantContext.GetDistinctCountires());
-            //ViewData["Kraji"] = new SelectList(await _restaurantContext.GetDistinctCities());
-
-            return View(null);
-
-            //return View(context[0]);
+            return View(await _context.Rezervacija.ToListAsync());
         }
 
-        public async Task<IActionResult> Create()
+        // GET: Rezervation/Create
+        public async Task<IActionResult> Create(string RestavracijaID, string GostID)
         {
-            var restavracije = await _restaurantContext.Restavracije.ToListAsync();
+            RezervationRequest request = new RezervationRequest {
+                RezerviranoZa = DateTime.Now,
+                StOseb = 0,
+                Restavracija = await _context.Restavracije.FirstOrDefaultAsync(r => r.Id == RestavracijaID),
+                GostID = GostID,
+                RestavracijaID = RestavracijaID,
+                Gost = await _context.Gostje.FirstOrDefaultAsync(g => g.GostID == int.Parse(GostID))
+            };
 
-            ViewData["Restavracije"] = new SelectList(restavracije);
+            return View(request);
+        }
 
-            return View();
+        // POST: Rezervation/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("GostID,RestavracijaID,RezerviranoZa,StOseb")] RezervationRequest request)
+        {
+            Rezervacija rezervacija = new Rezervacija {
+                Restavracija = await _context.Restavracije.FirstOrDefaultAsync(r => r.Id == request.RestavracijaID),
+                Gost = await _context.Gostje.FirstOrDefaultAsync(g => g.GostID == int.Parse(request.GostID)),
+                RezerviranoZa = request.RezerviranoZa,
+                DatumRezervacije = DateTime.Now,
+                StOseb = request.StOseb
+            };
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(rezervacija);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            
+            return View(request);
+        }
+
+        // GET: Rezervation/Login/RestaurantID
+        public IActionResult Login(string id) {
+            return View(new RezervationRequest { RestavracijaID = id });
+        }
+
+        // POST: Rezervation/Login
+        [HttpPost]
+        public async Task<IActionResult> Login([Bind("RestavracijaID,Email,Geslo")] RezervationRequest request)
+        {
+            var gost = await _context.Gostje
+                .FirstOrDefaultAsync(g => g.Email == request.Email && g.Geslo == request.Geslo);
+
+            if (gost == null) return NotFound();
+
+
+            return RedirectToAction(
+                "Create", 
+                "Rezervation", 
+                new { RestavracijaID = request.RestavracijaID, GostID = gost.GostID }
+            );
+        }
+
+        // GET: Rezervation/Restaurant
+        public async Task<IActionResult> Restaurant(string id) {
+            var restavracija = await _context.Restavracije.FirstOrDefaultAsync(r => r.Id == id);
+            ViewData["Naziv"] = restavracija.Naziv;
+
+            var rezervacije = await _context.Rezervacija
+                .Where(r => r.Restavracija.Id == id)
+                .Include(g => g.Gost)
+                .ToListAsync();
+            
+            return View(rezervacije);
         }
     }
 }
