@@ -87,5 +87,18 @@ namespace rezerviraj.si.Controllers
                 new { RestavracijaID = request.RestavracijaID, GostID = gost.GostID }
             );
         }
+
+        // GET: Rezervation/Restaurant
+        public async Task<IActionResult> Restaurant(string id) {
+            var restavracija = await _context.Restavracije.FirstOrDefaultAsync(r => r.Id == id);
+            ViewData["Naziv"] = restavracija.Naziv;
+
+            var rezervacije = await _context.Rezervacija
+                .Where(r => r.Restavracija.Id == id)
+                .Include(g => g.Gost)
+                .ToListAsync();
+            
+            return View(rezervacije);
+        }
     }
 }
