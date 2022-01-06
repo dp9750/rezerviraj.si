@@ -45,5 +45,26 @@ namespace rezerviraj.si.Controllers
             return View();
         }
 
+        // GET: Guest/Delete/GostID
+        public async Task<IActionResult> Delete(int id) {
+            var gost = await _context.Gostje
+                .FirstOrDefaultAsync(m => m.GostID == id);
+
+            if (gost == null) 
+                return NotFound();
+            return View(gost);
+        }
+
+        // POST: Guest/Delete/GostID
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var gost = await _context.Gostje.FindAsync(id);
+            _context.Gostje.Remove(gost);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
