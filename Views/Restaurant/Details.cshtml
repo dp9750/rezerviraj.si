@@ -23,6 +23,20 @@
                                 <ul class="list-group">
                                     <li class="list-group-item ps-0 border-0">
                                         <a class="btn btn-outline-primary btn-block text-start"
+                                            asp-controller="Table" asp-action="Index" asp-route-id="@Model.Id">
+                                            <i class="fas fa-utensils"></i>
+                                            Pregled miz
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item ps-0 border-0">
+                                        <a class="btn btn-outline-primary btn-block text-start"
+                                            asp-controller="Table" asp-action="Create" asp-route-id="@Model.Id">
+                                            <i class="far fa-calendar-plus"></i>
+                                            Dodaj mizo
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item ps-0 border-0">
+                                        <a class="btn btn-outline-primary btn-block text-start"
                                             asp-action="Edit" asp-route-id="@Model.Id">
                                             <i class="fas fa-edit"></i>
                                             Uredi

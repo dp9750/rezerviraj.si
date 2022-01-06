@@ -1,42 +1,29 @@
 @model rezerviraj.si.Models.Miza
 
-@using Microsoft.AspNetCore.Identity
-@using rezerviraj.si.Models
-
-@inject UserManager<Restavracija> UserManager
-
 @{
     ViewData["Title"] = "Create";
 }
 <div class="container pt-5">
-
-    <h1>Temp dodaj mizo</h1>
-
-    @if (@Model != null)
-    {
-        @Model.ToString();
-    }
-
-    <hr />
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="mb-4">Dodaj mizo</h1>
+            <hr />  
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="RestavracijaID" value="@UserManager.GetUserId(User)">
-                <div class="form-group">
+                <input type="hidden" asp-for="RestavracijaID" value='@ViewData["RestavracijaID"]'>
+                <div class="form-group mb-4">
                     <label asp-for="StMize" class="control-label"></label>
                     <input asp-for="StMize" class="form-control mb-2" />
                     <span asp-validation-for="StMize" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label asp-for="StOseb" class="control-label"></label>
                     <input asp-for="StOseb" class="form-control mb-2" />
                     <span asp-validation-for="StOseb" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary btn-lg" />
+                    <input type="submit" value="Dodaj mizo" class="btn btn-primary btn-lg me-2" />
+                    <a asp-action="Index" asp-route-id='@ViewData["RestavracijaID"]'>Prekliči</a>
                 </div>
             </form>
         </div>
