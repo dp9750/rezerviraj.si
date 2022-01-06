@@ -1,0 +1,19 @@
+@model rezerviraj.si.Models.Gost
+
+@{
+    ViewData["Title"] = "Izbriši gosta";
+}
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>Izbriši gosta</h1>
+            <hr />
+            <p>Ali ste prepričani da želite izbrisati gosta?</p>
+            <form asp-action="Delete" class="my-4">
+                <input type="hidden" asp-for="@Model.GostID" />
+                <input type="submit" value="Izbriši gosta" class="btn btn-danger me-3" />
+                <a asp-action="Index">Prekliči</a>
+            </form>
+        </div>
+    </div>
+</div>
