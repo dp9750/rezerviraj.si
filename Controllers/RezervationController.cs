@@ -14,33 +14,30 @@ namespace rezerviraj.si.Controllers
 {
     public class RezervationController : Controller
     {
-        private readonly RestaurantContext _restaurantContext;
+        private readonly RestaurantContext _context;
         private readonly ILogger<HomeController> _logger;
+        private string _resID = null;
 
-        public RezervationController(ILogger<HomeController> logger, RestaurantContext restaurantContext)
+        public RezervationController(ILogger<HomeController> logger, RestaurantContext context)
         {
-            _restaurantContext = restaurantContext;
+            _context = context;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        // GET: Rezervation
+        public async Task<IActionResult> Index()
         {
-            //var context = await _restaurantContext.Restavracije.Include(l => l.Lokacija).ToListAsync();
-
-            //ViewData["Drzave"] = new SelectList(await _restaurantContext.GetDistinctCountires());
-            //ViewData["Kraji"] = new SelectList(await _restaurantContext.GetDistinctCities());
-
-            return View(null);
-
-            //return View(context[0]);
+            return View(await _context.Rezervacija.ToListAsync());
         }
 
-        public async Task<IActionResult> Create()
+        // GET: Rezervation/Create
+        public IActionResult Create()
         {
-            var restavracije = await _restaurantContext.Restavracije.ToListAsync();
+            return View();
+        }
 
-            ViewData["Restavracije"] = new SelectList(restavracije);
-
+        // GET: Rezervation/Login
+        public IActionResult Login() {
             return View();
         }
     }
