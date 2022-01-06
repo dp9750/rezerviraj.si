@@ -1,0 +1,16 @@
+@model IEnumerable<rezerviraj.si.Models.Gost>
+
+@{
+    ViewData["Title"] = "Title";
+}
+
+<h1>Vsi gostje</h1>
+
+<a asp-action="Create">Ustvari</a>
+
+<br>
+
+@foreach (var item in Model)
+{
+    @Html.Raw(item.Json());
+}
