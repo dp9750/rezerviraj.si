@@ -16,7 +16,6 @@ namespace rezerviraj.si.Controllers
     {
         private readonly RestaurantContext _context;
         private readonly ILogger<HomeController> _logger;
-        private string _resID = null;
 
         public RezervationController(ILogger<HomeController> logger, RestaurantContext context)
         {
@@ -31,14 +30,62 @@ namespace rezerviraj.si.Controllers
         }
 
         // GET: Rezervation/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(string RestavracijaID, string GostID)
         {
-            return View();
+            RezervationRequest request = new RezervationRequest {
+                RezerviranoZa = DateTime.Now,
+                StOseb = 0,
+                Restavracija = await _context.Restavracije.FirstOrDefaultAsync(r => r.Id == RestavracijaID),
+                GostID = GostID,
+                RestavracijaID = RestavracijaID,
+                Gost = await _context.Gostje.FirstOrDefaultAsync(g => g.GostID == int.Parse(GostID))
+            };
+
+            return View(request);
         }
 
-        // GET: Rezervation/Login
-        public IActionResult Login() {
-            return View();
+        // POST: Rezervation/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("GostID,RestavracijaID,RezerviranoZa,StOseb")] RezervationRequest request)
+        {
+            Rezervacija rezervacija = new Rezervacija {
+                Restavracija = await _context.Restavracije.FirstOrDefaultAsync(r => r.Id == request.RestavracijaID),
+                Gost = await _context.Gostje.FirstOrDefaultAsync(g => g.GostID == int.Parse(request.GostID)),
+                RezerviranoZa = request.RezerviranoZa,
+                DatumRezervacije = DateTime.Now,
+                StOseb = request.StOseb
+            };
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(rezervacija);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            
+            return View(request);
+        }
+
+        // GET: Rezervation/Login/RestaurantID
+        public IActionResult Login(string id) {
+            return View(new RezervationRequest { RestavracijaID = id });
+        }
+
+        // POST: Rezervation/Login
+        [HttpPost]
+        public async Task<IActionResult> Login([Bind("RestavracijaID,Email,Geslo")] RezervationRequest request)
+        {
+            var gost = await _context.Gostje
+                .FirstOrDefaultAsync(g => g.Email == request.Email && g.Geslo == request.Geslo);
+
+            if (gost == null) return NotFound();
+
+
+            return RedirectToAction(
+                "Create", 
+                "Rezervation", 
+                new { RestavracijaID = request.RestavracijaID, GostID = gost.GostID }
+            );
         }
     }
 }

@@ -1,4 +1,4 @@
-@model rezerviraj.si.Models.Rezervacija
+@model rezerviraj.si.Models.RezervationRequest
 
 @{
     ViewData["Title"] = "Dodaj rezervacijo";
@@ -10,7 +10,8 @@
             <h1>Dodaj rezervacijo</h1>
             <hr />
             <form asp-action="Create" method="post">
-                <input type="hidden" asp-for="Gost" value="ViewBag.GostID">
+                <input type="hidden" asp-for="GostID" value="@Model.GostID">
+                <input type="hidden" asp-for="RestavracijaID" value="@Model.RestavracijaID">
                 <div class="form-group mb-4">
                     <label asp-for="RezerviranoZa" class="control-label"></label>
                     <input asp-for="RezerviranoZa" class="form-control mb-2" />

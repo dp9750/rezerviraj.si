@@ -7,15 +7,13 @@
 <div class="container pt-5">
 
     <h1>Vse rezervacije</h1>
-    <a asp-action="Create">Dodaj rezervacijo</a>
-    <br>
 
     @if (Model.Count() == 0) {
         <p>Ni še nobene rezervacije</p>
     } else {
         @foreach (var rezervacija in Model)
         {
-            @Html.Raw(rezervacija);
+            @Html.Raw(rezervacija); <br>
         }
     }
     
