@@ -9,9 +9,9 @@
         <div class="col-md-6 offset-md-3">
             <h1 class="mb-4">Mize restavracije @ViewData["Naziv"]</h1>
             <a asp-action="Details" asp-controller="Restaurant" 
-                asp-route-id='@ViewData["RestavracijaID"]' class="mb-3">Nazaj</a>
+                asp-route-id='@ViewData["RestavracijaID"]'>Nazaj</a>
             @if (Model.Count() == 0) {
-                <div class="card">
+                <div class="card mt-3">
                     <div class="card-header">
                         Obvestilo
                     </div>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             } else {
-                <table class="table">
+                <table class="table mt-3">
                     <thead>
                         <tr>
                             <th scope="col">ID mize</th>
