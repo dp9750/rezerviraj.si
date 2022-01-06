@@ -22,7 +22,8 @@
                     <span asp-validation-for="StOseb" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Dodaj mizo" class="btn btn-primary btn-lg" />
+                    <input type="submit" value="Dodaj mizo" class="btn btn-primary btn-lg me-2" />
+                    <a asp-action="Index" asp-route-id='@ViewData["RestavracijaID"]'>Prekliči</a>
                 </div>
             </form>
         </div>

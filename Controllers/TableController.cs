@@ -31,6 +31,7 @@ namespace rezerviraj.si.Controllers
 
             if (restaurantName == null) return NotFound();
             ViewData["Naziv"] = restaurantName.Naziv;
+            ViewData["RestavracijaID"] = restaurantName.Id;
 
             return View(context);
         }

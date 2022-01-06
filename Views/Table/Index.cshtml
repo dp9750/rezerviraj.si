@@ -8,6 +8,8 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h1 class="mb-4">Mize restavracije @ViewData["Naziv"]</h1>
+            <a asp-action="Details" asp-controller="Restaurant" 
+                asp-route-id='@ViewData["RestavracijaID"]' class="mb-3">Nazaj</a>
             @if (Model.Count() == 0) {
                 <div class="card">
                     <div class="card-header">
