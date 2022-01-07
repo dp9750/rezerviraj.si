@@ -27,13 +27,19 @@ namespace rezerviraj.si
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen();
+
             services.AddControllersWithViews();
+
+            services.AddSwaggerGen();
 
             services.AddDbContext<RestaurantContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AzureContext")));
 
             services.AddIdentity<Restavracija, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
                 .AddEntityFrameworkStores<RestaurantContext>().AddDefaultUI().AddDefaultTokenProviders();
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +57,11 @@ namespace rezerviraj.si
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseRouting();
 
