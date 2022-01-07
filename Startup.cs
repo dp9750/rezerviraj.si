@@ -30,7 +30,7 @@ namespace rezerviraj.si
             services.AddControllersWithViews();
 
             services.AddDbContext<RestaurantContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Context")));
+                options.UseSqlServer(Configuration.GetConnectionString("AzureContext")));
 
             services.AddIdentity<Restavracija, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
                 .AddEntityFrameworkStores<RestaurantContext>().AddDefaultUI().AddDefaultTokenProviders();
