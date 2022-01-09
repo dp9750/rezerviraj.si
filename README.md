@@ -12,15 +12,15 @@ API dokumentacija: [Link](https://rezerviraj-si.azurewebsites.net/swagger/index.
 # Kako deluje?
 Restavracija klikne na link za registracijo in se registrira. Izpolniti mora podatke o svoji lokaciji in nato lahko uporabniki oddajo rezervacijo pri njej.
 
-![Landing page](img/front.png)
+![Landing page](img/front.PNG)
 
 Uporabnik pride na t.i. *landing page*, kjer ima možnost poiskati rezervacije v izbranem mestu ali pa gre na stran, kjer so objavljene vse restavracije. Od tam naprej lahko pogleda dodatne informacije o posamezni restavraciji ali pa kar direktno odda rezervacijo. Z klikom na gumb rezerviraj ga aplikacija najprej pelje na prijavo gostov, nato še izpolni vse podatke o rezervaciji. 
 
-![Vse restavracije](img/vse.png)
+![Vse restavracije](img/vse.PNG)
 
 Ko se določena restavracija prijavi, lahko vidi vse svoje podrobne podatke, katere rezervacije je prejela, lahko dodaja ali briše mize in še več. 
 
-![Podrobnosti](img/details.png)
+![Podrobnosti](img/details.PNG)
 
 # Podatkovna baza
 
