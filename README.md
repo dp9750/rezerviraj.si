@@ -23,4 +23,4 @@ Najine tabele:
 - **Rezervacija** - tu so shranjene vse oddane rezervacije. Shranjeni so podatki o tem, kdo je rezerviral, pri kateri restavraciji, kdaj, za kdaj in za koliko oseb.
 
 Slika podatkovne baze (brez tabel paketa ASP Identity): 
-![This is an image](img/baza.png)
+![Baza](img/baza.png)
