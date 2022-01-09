@@ -2,11 +2,11 @@
  
 Namen aplikacije rezerviraj.si je prehod na digitalno rezerviranje mize v izbrani restavraciji. Najina aplikacija omogoča prav to; pregled restavracij v izbranem mestu in rezerviranje mize za določeno število ljudi. Restavracijam pa omogoča pregled vseh rezervacij. 
 
-Link do spletne aplikacije: https://rezerviraj-si.azurewebsites.net/
+Link do spletne aplikacije: https://rezerviraj-si.azurewebsites.net/ <br>
 API dokumentacija: [Link](https://rezerviraj-si.azurewebsites.net/swagger/index.html)
 
 # Avtorja
-**Denis Prelog (63190238)** - izdelava spletne aplikacije in podatkovne baze
+**Denis Prelog (63190238)** - izdelava spletne aplikacije in podatkovne baze <br>
 **Evan Apollonio (63190047)** - izdelava mobilne aplikacije
 
 # Kako deluje?
