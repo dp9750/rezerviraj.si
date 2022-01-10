@@ -9,6 +9,7 @@
         <div class="col-md-6 offset-md-3">
             <h1>Vse rezervacije restavracije @ViewData["Naziv"]</h1>
             <hr>
+            <a asp-action="Details" asp-controller="Restaurant" asp-route-id='@ViewData["Id"]'>Nazaj</a>
             @if (Model.Count() == 0) {
                 <p>Ni še nobene rezervacije</p>
             } else {

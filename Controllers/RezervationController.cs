@@ -92,6 +92,7 @@ namespace rezerviraj.si.Controllers
         public async Task<IActionResult> Restaurant(string id) {
             var restavracija = await _context.Restavracije.FirstOrDefaultAsync(r => r.Id == id);
             ViewData["Naziv"] = restavracija.Naziv;
+            ViewData["Id"] = restavracija.Id;
 
             var rezervacije = await _context.Rezervacija
                 .Where(r => r.Restavracija.Id == id)
